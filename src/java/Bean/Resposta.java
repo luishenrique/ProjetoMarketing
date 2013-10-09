@@ -32,6 +32,7 @@ public class Resposta {
     Pesquisa pesquisa;
     
     @ManyToOne
+    @JoinColumn(name="questoes_id", referencedColumnName="id")   
     private Questao questao;
 
     public Integer getId() {

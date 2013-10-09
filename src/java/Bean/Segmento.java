@@ -27,7 +27,7 @@ public class Segmento {
     @Column(length = 40)
     private String nome;
     
-    @OneToMany(mappedBy = "segmentos")
+    @OneToMany(mappedBy = "segmento")
     private List<Pesquisa> pesquisas;
 
     public List<Pesquisa> getPesquisas() {
