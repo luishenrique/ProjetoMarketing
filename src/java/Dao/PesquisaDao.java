@@ -24,6 +24,7 @@ public class PesquisaDao {
         manager = factory.createEntityManager();
     }
 
+    // adiciona registro
     public Pesquisa add(Pesquisa pesquisa) {
         manager.getTransaction().begin();
         manager.persist(pesquisa);
@@ -31,22 +32,26 @@ public class PesquisaDao {
         return pesquisa;
     }
     
+    // atualiza registro
     public void update(Pesquisa pesquisa) {
         manager.getTransaction().begin();
         manager.merge(pesquisa);
         manager.getTransaction().commit();
     }
 
+    // deleta registro
     public void delete(Pesquisa pesquisa) {
         manager.getTransaction().begin();
         manager.remove(pesquisa);
         manager.getTransaction().commit();
     }
 
+    // encontra registro
     public Pesquisa find(int id) {
         return manager.find(Pesquisa.class, id);
     }
 
+    // Lista todos registros
     public List<Pesquisa> list() {
         Query query = manager.createQuery("from Pesquisas");
         return query.getResultList();

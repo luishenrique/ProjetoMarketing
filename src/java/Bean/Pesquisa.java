@@ -45,7 +45,7 @@ public class Pesquisa {
     )  
     private List<Questao> questoes;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "segmentos_id")
     private Segmento segmento;
  
@@ -104,6 +104,5 @@ public class Pesquisa {
     public void setSegmento(Segmento segmento) {
         this.segmento = segmento;
     }
-    
         
 }

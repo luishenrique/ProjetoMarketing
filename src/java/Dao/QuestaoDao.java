@@ -23,6 +23,7 @@ public class QuestaoDao {
         manager = factory.createEntityManager();
     }
 
+    // adiciona registro
     public Questao add(Questao questao) {
         manager.getTransaction().begin();
         manager.persist(questao);
@@ -30,22 +31,26 @@ public class QuestaoDao {
         return questao;
     }
 
+    // atualiza registro
     public void update(Questao questao) {
         manager.getTransaction().begin();
         manager.merge(questao);
         manager.getTransaction().commit();
     }
 
+    // deleta registro
     public void delete(Questao questao) {
         manager.getTransaction().begin();
         manager.remove(questao);
         manager.getTransaction().commit();
     }
 
+    // encontra registro
     public Questao find(int id) {
         return manager.find(Questao.class, id);
     }
 
+    // Lista todos registros
     public List<Questao> list() {
         Query query = manager.createQuery("from Questoes");
         return query.getResultList();
