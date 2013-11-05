@@ -19,7 +19,7 @@ public class RespostaDao {
     private EntityManager manager;
 
     public RespostaDao() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pesquisasPU");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("projetoMarketingPU");
         manager = factory.createEntityManager();
     }
 
@@ -52,7 +52,7 @@ public class RespostaDao {
 
     // Lista todos registros
     public List<Resposta> list() {
-        Query query = manager.createQuery("from Respostas");
+        Query query = manager.createQuery("from Resposta");
         return query.getResultList();
     }
     

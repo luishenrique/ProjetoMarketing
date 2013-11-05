@@ -4,9 +4,12 @@
  */
 package Bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,26 +32,24 @@ public class Pesquisa {
     @Id
     @GeneratedValue
     private Integer id;
-    
     @Column(length = 40)
     private String nome;
-    
     private Integer tipo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dataInicio;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dataFim;
     @ManyToMany
-    @JoinTable(name="pesquisas_questoes",
-    joinColumns=@JoinColumn(name="pesquisas_id"),
-    inverseJoinColumns=@JoinColumn(name="questoes_id")
-    )  
+    @JoinTable(name = "pesquisas_questoes",
+            joinColumns =
+            @JoinColumn(name = "pesquisa_id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "questao_id"))
     private List<Questao> questoes;
-
     @ManyToOne
-    @JoinColumn(name = "segmentos_id")
+    @JoinColumn(name = "segmento_id")
     private Segmento segmento;
- 
+
     public List<Questao> getQuestoes() {
         return questoes;
     }
@@ -85,12 +86,38 @@ public class Pesquisa {
         return dataInicio;
     }
 
+    public void setDataInicio(String dataInicio) throws ParseException {
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateformat.parse(dataInicio));
+        this.dataInicio = cal;
+    }
+
     public void setDataInicio(Calendar dataInicio) {
         this.dataInicio = dataInicio;
     }
 
     public Calendar getDataFim() {
         return dataFim;
+    }
+
+    public String getDataFimView() {
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        String data = s.format(this.dataFim.getTime());
+        return data;
+    }
+
+    public String getDataInicioView() {
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        String data = s.format(this.dataInicio.getTime());
+        return data;
+    }
+
+    public void setDataFim(String dataFim) throws ParseException {
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateformat.parse(dataFim));
+        this.dataFim = cal;
     }
 
     public void setDataFim(Calendar dataFim) {
@@ -104,5 +131,18 @@ public class Pesquisa {
     public void setSegmento(Segmento segmento) {
         this.segmento = segmento;
     }
+
+    public String verificaData() {
+        Date d = new Date();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(d);
         
+        String msg;
+        if (this.dataFim.before(cal)) {
+            msg = "Finalizada";
+        } else {
+            msg = "Ativa";
+        }
+        return msg;
+    }
 }

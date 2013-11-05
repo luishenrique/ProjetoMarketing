@@ -21,27 +21,8 @@ import javax.persistence.Persistence;
 public class Teste {
 
     public static void main(String args[]) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pesquisasPU");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("projetoMarketingPU");
         EntityManager manager = factory.createEntityManager();
-        
-        Segmento seg = new Segmento();
-        SegmentoDao daoseg = new SegmentoDao();
-        
-        seg.setNome("Segmento Teste");
-        
-        daoseg.add(seg);
-        
-        
-        Pesquisa p = new Pesquisa();
-        PesquisaDao daop = new PesquisaDao();
-        
-        p.setDataInicio(Calendar.getInstance());
-        p.setDataFim(Calendar.getInstance());
-        p.setNome("Pesquisa Teste");
-        p.setSegmento(seg);
-        p.setTipo(1);
-        daop.add(p);
-        
         
         
     }

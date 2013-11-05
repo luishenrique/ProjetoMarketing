@@ -4,7 +4,7 @@
  */
 package Dao;
 
-import Bean.Segmento;
+import Bean.Alternativa;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,45 +15,45 @@ import javax.persistence.Query;
  *
  * @author Luis Henrique
  */
-public class SegmentoDao {
+public class AlternativaDao {
     private EntityManager manager;
 
-    public SegmentoDao() {
+    public AlternativaDao() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("projetoMarketingPU");
         manager = factory.createEntityManager();
     }
 
     // adiciona registro
-    public Segmento add(Segmento segmento) {
+    public Alternativa add(Alternativa alternativa) {
         manager.getTransaction().begin();
-        manager.persist(segmento);
+        manager.persist(alternativa);
         manager.getTransaction().commit();
-        return segmento;
+        return alternativa;
     }
-
+    
     // atualiza registro
-    public void update(Segmento segmento) {
+    public void update(Alternativa alternativa) {
         manager.getTransaction().begin();
-        manager.merge(segmento);
+        manager.merge(alternativa);
         manager.getTransaction().commit();
     }
 
     // deleta registro
-    public void delete(Segmento segmento) {
+    public void delete(Alternativa alternativa) {
         manager.getTransaction().begin();
-        manager.remove(segmento);
+        manager.remove(alternativa);
         manager.getTransaction().commit();
     }
 
     // encontra registro
-    public Segmento find(int id) {
-        return manager.find(Segmento.class, id);
+    public Alternativa find(int id) {
+        return manager.find(Alternativa.class, id);
     }
 
     // Lista todos registros
-    public List<Segmento> list() {
-        Query query = manager.createQuery("from Segmento");
+    public List<Alternativa> list(int id) {
+        Query query = manager.createQuery("from Alternativa WHERE questao.id = :id");
+        query.setParameter("id", id);
         return query.getResultList();
     }
-    
 }

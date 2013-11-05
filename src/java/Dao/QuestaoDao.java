@@ -19,7 +19,7 @@ public class QuestaoDao {
     private EntityManager manager;
 
     public QuestaoDao() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pesquisasPU");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("projetoMarketingPU");
         manager = factory.createEntityManager();
     }
 
@@ -51,8 +51,9 @@ public class QuestaoDao {
     }
 
     // Lista todos registros
-    public List<Questao> list() {
-        Query query = manager.createQuery("from Questoes");
+    public List<Questao> list(int id) {
+        Query query = manager.createQuery("from Questao WHERE pesquisa.id = :id");
+        query.setParameter("id", id);
         return query.getResultList();
     }
 }

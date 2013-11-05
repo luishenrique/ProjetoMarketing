@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,13 +27,24 @@ public class Questao {
     private Integer id;
     private Integer tipo;
     private String descricao;
+    
     @ManyToMany
     @JoinTable(name = "pesquisas_questoes",
-    joinColumns=@JoinColumn(name="questoes_id"),
-    inverseJoinColumns=@JoinColumn(name="pesquisas_id")
-    )  
-    private List<Pesquisa> pesquisas;
+    joinColumns=@JoinColumn(name="questao_id"),
+    inverseJoinColumns=@JoinColumn(name="pesquisa_id"))  
+    private List<Pesquisa> pesquisas;    
+    
+    @OneToMany(mappedBy = "questao")
+    private List<Alternativa> alternativas;
 
+    public List<Alternativa> getAlternativas() {
+        return alternativas;
+    }
+
+    public void setAlternativas(List<Alternativa> alternativas) {
+        this.alternativas = alternativas;
+    }
+    
     public List<Pesquisa> getPesquisas() {
         return pesquisas;
     }

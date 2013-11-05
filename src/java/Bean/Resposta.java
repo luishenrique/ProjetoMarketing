@@ -4,11 +4,14 @@
  */
 package Bean;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,6 +37,20 @@ public class Resposta {
     @ManyToOne
     @JoinColumn(name="questoes_id", referencedColumnName="id")   
     private Questao questao;
+    
+    @ManyToMany
+    @JoinTable(name = "alternativas_respostas",
+    joinColumns = @JoinColumn(name = "resposta_id"),
+    inverseJoinColumns = @JoinColumn(name = "alternativa_id"))
+    private List<Alternativa> alternativas;
+
+    public List<Alternativa> getAlternativas() {
+        return alternativas;
+    }
+
+    public void setAlternativas(List<Alternativa> alternativas) {
+        this.alternativas = alternativas;  
+    }
 
     public Integer getId() {
         return id;

@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>PesquisaServlet</servlet-name>
+        <servlet-class>Servlet.PesquisaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestaoServlet</servlet-name>
+        <servlet-class>Servlet.QuestaoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AlternativaServlet</servlet-name>
+        <servlet-class>Servlet.AlternativaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RespostaServlet</servlet-name>
+        <servlet-class>Servlet.RespostaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PesquisaServlet</servlet-name>
+        <url-pattern>/admin/pesquisas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestaoServlet</servlet-name>
+        <url-pattern>/admin/questoes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AlternativaServlet</servlet-name>
+        <url-pattern>/admin/alternativas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RespostaServlet</servlet-name>
+        <url-pattern>/RespostaServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
