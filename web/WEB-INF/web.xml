@@ -30,7 +30,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RespostaServlet</servlet-name>
-        <url-pattern>/RespostaServlet</url-pattern>
+        <url-pattern>/user/respostas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

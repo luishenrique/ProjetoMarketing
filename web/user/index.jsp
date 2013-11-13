@@ -8,7 +8,7 @@
     <jsp:param name="pagina" value="home"/>
 </jsp:include>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="/user/fim.jsp" var="fim"></c:url>
+<c:url value="/user/respostas" var="url"></c:url>
 
 <%
     Pesquisa pesquisa = (Pesquisa) request.getAttribute("pesquisa");
@@ -18,10 +18,10 @@
     <div class="panel-heading"><h1><%= pesquisa.getNome()%></h1></div>
     <div class="panel-body">
 
-        <form class="form-group" action="${fim}" method="POST">
-
+        <form class="form-group" action="${url}" method="POST">
+            <input type="hidden" name="pesquisa.id" value="<%= pesquisa.getId()%>">
             <h3>Quantos anos você tem?</h3>
-            <input type="text" class="input-group" name="idade"></p>
+            <input type="text" class="input-group" name="idade">
             <br>
 
             <h3>Sexo:</h3>
@@ -36,13 +36,14 @@
                 questoes = pesquisa.getQuestoes();
                 for (Questao questao : questoes) {
             %>
-            </br>            
-            <h3><%= questao.getDescricao()%></h3>
+            <input type="hidden" name="questao.id" value="<%= questao.getId()%>">
+                   </br>            
+                   <h3><%= questao.getDescricao()%></h3>
 
-            <%
-                if (questao.getTipo() == 3) {
-            %>
-            <textarea name="comentario" cols="80" rows="8"></textarea>
+                   <%
+                       if (questao.getTipo() == 3) {
+                   %>
+                   <textarea name="comentario" cols="80" rows="8"></textarea>
             <%}
                 List<Alternativa> alternativas = new ArrayList<Alternativa>();
                 alternativas = questao.getAlternativas();
@@ -50,11 +51,11 @@
                     for (Alternativa alternativa : alternativas) {
                         if (questao.getTipo() == 1) {
             %>
-            <input class="checkbox-inline" type="checkbox" name="alternativa.id" value="<%= alternativa.getId()%>">  <%= alternativa.getDescricao()%><br>
+            <input class="checkbox-inline" type="checkbox" name="alternativa[<%= questao.getId() %>].id" value="<%= alternativa.getId()%>">  <%= alternativa.getDescricao()%><br>
             <%        }
                 if (questao.getTipo() == 2) {
             %>
-            <input class="radio-inline" type="radio" name="alternativa.<%= questao.getId()%>" value="<%= alternativa.getId()%>">  <%= alternativa.getDescricao()%><br>
+            <input class="radio-inline" type="radio" name="alternativa[<%= questao.getId() %>].id" value="<%= alternativa.getId()%>">  <%= alternativa.getDescricao()%><br>
 
             <%     }
                 }
@@ -67,9 +68,9 @@
             %>
             </br>
             </br>
-            
+            <input type="hidden" name="comando" value="cadastrar">
             <button type="submit" class="btn btn-primary">Salvar</button>
-
+            
         </form>
 
 

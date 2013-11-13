@@ -1,9 +1,4 @@
 
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Bean.Questao"%>
-<%@page import="Bean.Alternativa"%>
-<%@page import="Bean.Pesquisa"%>
 <jsp:include page="head.jsp">
     <jsp:param name="pagina" value="home"/>
 </jsp:include>
